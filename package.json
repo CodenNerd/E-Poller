@@ -1,0 +1,37 @@
+{
+  "name": "e-poller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "dependencies": {
+    "@types/express": "^4.17.9",
+    "@types/node": "^14.14.10",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.15",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.0.0"
+  },
+  "scripts": {
+    "start:dev": "nodemon",
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CodenNerd/E-Poller.git"
+  },
+  "author": "AbdulAzeez Atanda",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CodenNerd/E-Poller/issues"
+  },
+  "homepage": "https://github.com/CodenNerd/E-Poller#readme"
+}
