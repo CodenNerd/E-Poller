@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 app.get('/createDB', (req, res) => {
     setDBExists(false);
     let query = `CREATE DATABASE ${process.env.DB_DB}`;
-    db.query(query, (err, result) => {
+    db.query(query, (err: any, result: any) => {
         res.send(err || result)
     })
 })
@@ -28,7 +28,7 @@ app.get('/createDB', (req, res) => {
 app.get('/runMigrations', (req, res) => {
     setDBExists(true);
     let query = createTable;
-    db.query(query, (err, result) => {
+    db.query(query, (err: any, result: any) => {
         res.send(err || result)
     })
 })
@@ -37,7 +37,7 @@ app.use((req, res) => {
   res.status(404).send({response: "404 - route not found"});
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 export default app;

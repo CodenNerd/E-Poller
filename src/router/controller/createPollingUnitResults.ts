@@ -3,7 +3,7 @@ import db from "./../../database/connection";
 const createPollingUnitResults = (req: any, res: any) => {    
     const {polling_unit_uniqueid, party_abbreviation, party_score, entered_by_user, user_ip_address} = req.body;
     const selectQuery = `SELECT * FROM announced_pu_results WHERE polling_unit_uniqueid='${req.body.polling_unit_uniqueid}' AND party_abbreviation='${party_abbreviation}'`;
-    db.query(selectQuery, (error, results) => {
+    db.query(selectQuery, (error: any, results: any) => {
         if (results[0]) {
             return res.status(400).send({
                 response: "party has already been inserted"

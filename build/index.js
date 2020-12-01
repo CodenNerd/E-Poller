@@ -54,6 +54,6 @@ app.get('/runMigrations', function (req, res) {
 app.use(function (req, res) {
     res.status(404).send({ response: "404 - route not found" });
 });
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 5000;
 app.listen(port, function () { return console.log("Listening on port " + port); });
 exports.default = app;

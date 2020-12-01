@@ -1,12 +1,24 @@
 import mysql from 'mysql';
 import dbConfig from "./config";
 
-const db = mysql.createConnection(dbConfig)
-const new_db = mysql.createConnection(dbConfig)
+let db: any;
+function handleDisconnect() {
+    db = mysql.createConnection(dbConfig)
 
+    db.connect((err: any)=>{
+        console.log(err || "Db connected")
+        if(err) setTimeout(handleDisconnect, 2000);
+    })
 
-db.connect((err)=>{
-    console.log(err || "Db connected")
-})
+    db.on('error', function(err: any) {
+        console.log('db error', err);
+        if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+          handleDisconnect();                         // lost due to either server restart, or a
+        } else {                                      // connnection idle timeout (the wait_timeout
+          throw err;                                  // server variable configures this)
+        }
+      });
+}
 
+handleDisconnect();
 export default db;
