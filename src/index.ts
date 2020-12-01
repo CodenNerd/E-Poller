@@ -3,6 +3,7 @@ import { json, urlencoded } from 'body-parser';
 import apiVersion1 from './router/v1';
 import db from "./database/connection";
 import createTable from './database/exec';
+import { setDBExists } from './database/config';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/createDB', (req, res) => {
+    setDBExists(false);
     let query = "CREATE DATABASE bincomphptest";
     db.query(query, (err, result) => {
         res.send(err || result)
@@ -22,6 +24,7 @@ app.get('/createDB', (req, res) => {
 })
 
 app.get('/runMigrations', (req, res) => {
+    setDBExists(true);
     let query = createTable;
     db.query(query, (err, result) => {
         res.send(err || result)

@@ -8,15 +8,14 @@ const createPollingUnitResults = (req: any, res: any) => {
             return res.status(400).send({
                 response: "party has already been inserted"
             })
-
-            const query = `INSERT INTO announced_pu_results (\`polling_unit_uniqueid\`, \`party_abbreviation\`, \`party_score\`, \`entered_by_user\`, \`date_entered\`, \`user_ip_address\`) VALUES
-                            ('${polling_unit_uniqueid}', '${party_abbreviation}', ${party_score}, '${entered_by_user}', '${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}', '192.168.1.101')`;
-            db.query(query, (err: any, result: any) => {
-                res.status(err?500:200).send({
-                    result
-                })
-            });
         }
+        const query = `INSERT INTO announced_pu_results (\`polling_unit_uniqueid\`, \`party_abbreviation\`, \`party_score\`, \`entered_by_user\`, \`date_entered\`, \`user_ip_address\`) VALUES
+                        ('${polling_unit_uniqueid}', '${party_abbreviation}', ${party_score}, '${entered_by_user}', '${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}', '192.168.1.101')`;
+        db.query(query, (err: any, result: any) => {
+            res.status(err?500:200).send({
+                result
+            })
+        });
     })
     
 }
