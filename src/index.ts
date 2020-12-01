@@ -4,7 +4,9 @@ import apiVersion1 from './router/v1';
 import db from "./database/connection";
 import createTable from './database/exec';
 import { setDBExists } from './database/config';
+import * as dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
 
 app.use(json());
@@ -17,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.get('/createDB', (req, res) => {
     setDBExists(false);
-    let query = "CREATE DATABASE bincomphptest";
+    let query = `CREATE DATABASE ${process.env.DB_DB}`;
     db.query(query, (err, result) => {
         res.send(err || result)
     })
