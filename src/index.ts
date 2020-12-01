@@ -5,10 +5,12 @@ import db from "./database/connection";
 import createTable from './database/exec';
 import { setDBExists } from './database/config';
 import * as dotenv from "dotenv";
+import cors from 'cors';
 
 dotenv.config();
 const app = express();
 
+app.use(cors())
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use('/api/v1', apiVersion1);
