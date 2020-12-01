@@ -7,9 +7,10 @@ var mysql_1 = __importDefault(require("mysql"));
 var config_1 = __importDefault(require("./config"));
 var db;
 function handleDisconnect() {
-    db = mysql_1.default.createConnection(config_1.default);
-    db.connect(function (err) {
+    db = mysql_1.default.createPool(config_1.default);
+    db.getConnection(function (err, conn) {
         console.log(err || "Db connected");
+        conn.release();
         if (err)
             setTimeout(handleDisconnect, 2000);
     });

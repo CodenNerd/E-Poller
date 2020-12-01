@@ -3,10 +3,11 @@ import dbConfig from "./config";
 
 let db: any;
 function handleDisconnect() {
-    db = mysql.createConnection(dbConfig)
+    db = mysql.createPool(dbConfig)
 
-    db.connect((err: any)=>{
+    db.getConnection((err: any, conn: any)=>{
         console.log(err || "Db connected")
+        conn.release();
         if(err) setTimeout(handleDisconnect, 2000);
     })
 
